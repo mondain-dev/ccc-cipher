@@ -19,12 +19,12 @@ Base64_CJK.py [OPTIONS]
   -h, --help:      print this help
 ```
 #### Example:
-For encryption:
+For encoding :
 ```
 base64 plaintext.txt > encoded.base64.txt
 python Base64_CJK.py -e -i encoded.base64.txt -o encoded.CJK.txt
 ```
-For decryption:
+For decoding:
 ```
 python Base64_CJK.py -d -i encoded.CJK.txt -o decoded.base64.txt
 base64 -d decoded.base64.txt > decoded.txt
