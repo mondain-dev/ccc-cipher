@@ -44,7 +44,7 @@ cipher.sh encrypted.txt
 ```
 This will prompt you to enter and confirm the password, then input the text to be encrypted. If `encrypted.txt` exists, you will be asked to enter the password used to encrypt this file, and encrypt the plaintext which is the new input appended to the end of the previous one. 
 
-The encrypted text in base64 will be saved to `encrypted.txt` (which can be decrypted by openssl) and CJK-encoded `encrypted.CJK.txt`
+The encrypted text in base64 will be saved to `encrypted.txt` (which can be decrypted by openssl) and CJK-encoded `encrypted.CJK.txt`.
 
 To decrypt the `encrypted.CJK.txt`:
 ```
