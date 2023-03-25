@@ -3,7 +3,6 @@ import os.path
 import getopt
 import csv
 import random
-import base64
 import re
 
 ### base32 codes
@@ -48,9 +47,10 @@ def CodePointToCJK(listCodePoints):
     strCJK = ''
     for n in listCodePoints:
         for k in range(len(dictCCCDecoding) // NCodePoints + 1):
-            if '%04d' % (n + NCodePoints*k) in dictCCCDecoding:
+            codepoint = '%04d' % (n + NCodePoints*k)
+            if codepoint in dictCCCDecoding:
                 # CCC
-                strCJK += random.choice(dictCCCDecoding['%04d' % (n + NCodePoints*k)].split())
+                strCJK += random.choice(dictCCCDecoding[codepoint].split())
                 break
     return strCJK
 
@@ -65,7 +65,7 @@ def CJKToCodePoint(strCJK):
 def CJKToBase32(strCJK):
     strBase32 = ''
     for n in CJKToCodePoint(strCJK):
-        if n > 0:
+        if n >= 0:
             if n < B*B:
                 n1 = n / B
                 n2 = n % B
