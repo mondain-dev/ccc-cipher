@@ -3,14 +3,14 @@ A cipher using [Chinese Commercial Code](https://en.wikipedia.org/wiki/Chinese_t
 
 ## Usage
 There are two components in this cipher:
-* `Base64_CJK.py` encodes base64 strings into CJK strings, and decodes the original base64 from CJK codes.
+* `Base32CJK.py` encodes base32 strings into CJK strings, and decodes the original base32 from CJK codes. Note that the encoding does not work for base64.
 * Entryptor/Decryptor
-  * `cipher.sh` encrypts any file (binary or otherwise) using [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) implemented in `openssl`, and encodes the encrypted file into CJK characters.
+  * `cipher.sh` encrypts any file (binary or otherwise) using [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) with [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) implemented in `openssl`, and encodes the encrypted file into CJK characters.
   * `decipher.sh` decrypts the file encrypted by `cipher.sh`
 
-### `Base64_CJK.py`
+### `Base32CJK.py`
 ```
-Base64_CJK.py [OPTIONS]
+Base32CJK.py [OPTIONS]
   OPTIONS:
   -i, --in=:       input file (required)
   -o, --out=:      output file
@@ -21,13 +21,13 @@ Base64_CJK.py [OPTIONS]
 #### Example:
 For encoding :
 ```
-base64 plaintext.txt > encoded.base64.txt
-python Base64_CJK.py -e -i encoded.base64.txt -o encoded.CJK.txt
+base32 plaintext.txt > encoded.base32.txt
+python Base32CJK.py -e -i encoded.base32.txt -o encoded.CJK.txt
 ```
 For decoding:
 ```
-python Base64_CJK.py -d -i encoded.CJK.txt -o decoded.base64.txt
-base64 -d decoded.base64.txt > decoded.txt
+python Base32CJK.py -d -i encoded.CJK.txt -o decoded.base32.txt
+base32 -d decoded.base32.txt > decoded.txt
 diff decoded.txt plaintext.txt
 ```
 
@@ -40,14 +40,14 @@ decipher.sh <encrypted CJK file>
 #### Example
 For encryption:
 ```
-cipher.sh encrypted.txt
+./cipher.sh encrypted.txt
 ```
-This will prompt you to enter and confirm the password, then input the text to be encrypted. If `encrypted.txt` exists, you will be asked to enter the password used to encrypt this file, and encrypt the plaintext which is the new input appended to the end of the previous one. 
+This will prompt you to enter and confirm the password, then input the text to be encrypted. If there already exists an `encrypted.txt`, you will be asked to enter the password used to encrypt this file, any new plaintext inputs will be appended to the end of the previous ones, and then encrypted. 
 
-The encrypted text in base64 will be saved to `encrypted.txt` (which can be decrypted by openssl) and CJK-encoded `encrypted.CJK.txt`.
+The encrypted text in base32 will be saved to `encrypted.txt` and CJK-encoded `encrypted.CJK.txt`.
 
 To decrypt the `encrypted.CJK.txt`:
 ```
-decipher.sh encrypted.CJK.txt
+./decipher.sh encrypted.CJK.txt
 ```
-This will show the decrypted information on the screen, but not save it on hard disk.
+This will show the decrypted information on the screen, but will not save it on hard disk.

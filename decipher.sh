@@ -6,6 +6,6 @@ if [ -z "$encCJK" ]; then
 else
   if [ -f "$encCJK" ]; then
     DIR_SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-    python "$DIR_SCRIPT"/Base64_CJK.py -i $encCJK -d | openssl enc -aes-256-ctr -a -A -d
+    python "$DIR_SCRIPT"/Base32CJK.py -i $encCJK -d | base32 -d | openssl enc -pbkdf2 -aes-256-ctr -A -d
   fi | less
 fi
