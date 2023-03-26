@@ -90,8 +90,15 @@ This scheme covers all double- and single-quintet strings in `base32`. To cover 
 #### Examples
 
 To decode the CJK character `歌`, we first identify its CCC code point $c=2960\equiv 848 \bmod1056$. Then we decode $p=848$ as two 5-bit code points $26,16$ corresponding to two `base32` symbols `2Q`.
-
+```
+$ echo 歌 | python Base32CJK.py -d
+2Q======
+```
 In another example we decode the CJK character `堡` which has CCC $1027 \ge 1024$. Hence, we decode $p=1027\equiv3\bmod1024$ as a single `base32` symbol `D`.
+```
+$ echo 堡 | python Base32CJK.py -d
+D
+```
 
 ## References
 
