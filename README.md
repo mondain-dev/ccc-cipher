@@ -83,7 +83,7 @@ This cipher is based on the Chinese Commercial Code, and more specifically, a su
 
 ### Decoding Algorithm
 
-For a given encoded CJK character, we first look up it in the code book to find its CCC code point $c$ and compute $c\equiv p \bmod 1056(=32\cdot32+32)$ with $0 \le p\in\Z<1056$. If $p<1024$, we can decode $p$ as two quintets (5-bit) `base32` symbols, otherwise we interpret $p \bmod 1024$ as a single quintet `base32` symbol. 
+For a given encoded CJK character, we first look up it in the code book to find its CCC code point $c$ and compute $c\equiv p \bmod 1056(=32\cdot32+32)$ with $0 \le p\in\mathbb{Z}<1056$. If $p<1024$, we can decode $p$ as two quintets (5-bit) `base32` symbols, otherwise we interpret $p \bmod 1024$ as a single quintet `base32` symbol. 
 
 This scheme covers all double- and single-quintet strings in `base32`. To cover double- and single-sextets (6-bit) in  `base64` under this scheme, using concensus CCC is inadequate.
 
