@@ -26,7 +26,7 @@ base32 plain.bin | python Base32CJK.py -e -o encoded.CJK.txt
 ```
 For decoding:
 ```
-python Base32CJK.py -d -i encoded.CJK.txt | base32 -d decoded.base32.txt > decoded.bin
+python Base32CJK.py -d -i encoded.CJK.txt | base32 -d > decoded.bin
 ```
 
 To verify:
