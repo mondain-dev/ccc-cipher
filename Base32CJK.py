@@ -95,6 +95,8 @@ def Base32CJKDecoder(inputCJK):
     for C in inputCJK:
         yield CJKToBase32(C)
 
+# assert all([len(CodePointToCJK([i])) > 0 for i in range(NCodePoints)])
+
 def main():
     in_file  = None
     out_file = None
@@ -121,9 +123,9 @@ def main():
         else:
             assert False, "unhandled option"
 
-    if not in_file:
-        helpBase32CJK()
-        sys.exit(1)
+    # if not in_file:
+    #     helpBase32CJK()
+    #     sys.exit(1)
 
     out_writer = sys.stdout
     if out_file:
@@ -133,7 +135,9 @@ def main():
     if encoding:
         MAX_LINE_LEN=16
         line_len_counter=0
-        f = open(in_file, 'r')
+        f = sys.stdin
+        if in_file:
+            f = open(in_file, 'r')
         for C in Base32CJKEncoder(read_char(f)):
             for s in C:
                 out_writer.write(s.encode('utf8'))
@@ -144,7 +148,9 @@ def main():
         if line_len_counter > 0:
             out_writer.write('\n')
     else:
-        f = open(in_file, 'r')
+        f = sys.stdin
+        if in_file:
+            f = open(in_file, 'r')
         base32Counter=0
         for C in Base32CJKDecoder(read_char(f)):
             for s in C:
@@ -163,7 +169,7 @@ def helpBase32CJK():
     args = sys.argv[0:]
     print(''.join(['Usage: \n', args[0], ' [OPTIONS]']))
     print('  OPTIONS:')
-    print('  -i, --in=:       input file (required)')
+    print('  -i, --in=:       input file, use stdin if not supplied')
     print('  -o, --out=:      output file')
     print('  -e, --encoding:  encode the input')
     print('  -d, --decoding:  decode the input')
