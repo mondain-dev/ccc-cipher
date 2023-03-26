@@ -163,7 +163,7 @@ def main():
         elif base32Counter % 8 == 5:
             out_writer.write("===")
         elif base32Counter % 8 == 7:
-            out_writer.write("==")
+            out_writer.write("=")
 
 def helpBase32CJK():
     args = sys.argv[0:]

@@ -44,7 +44,7 @@ gzip -c plain.bin | base32 | python Base32CJK.py -e -o compressed.CJK.txt
 ```
 For decoding:
 ```
-python Base32CJK.py -d -i encoded.CJK.txt | base32 -d | gunzip -d > decompressed.bin
+python Base32CJK.py -d -i compressed.CJK.txt | base32 -d | gunzip -d > decompressed.bin
 ```
 
 To verify:
