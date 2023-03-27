@@ -1,6 +1,8 @@
 # CCC Cipher
 A `base32` ⇌ CJK cipher using the [Chinese Commercial Code](https://en.wikipedia.org/wiki/Chinese_telegraph_code) (CCC), aka the Chinese Telegraph Code.
 
+See demon: [https://mondain-dev.github.io/ccc-cipher-js/](https://mondain-dev.github.io/ccc-cipher-js/)
+
 ## Usage
 There are two components in this cipher:
 * `Base32CJK.py` encodes base32 strings into CJK strings, and decodes the original base32 from CJK codes. Note that the encoding does not work for base64.
